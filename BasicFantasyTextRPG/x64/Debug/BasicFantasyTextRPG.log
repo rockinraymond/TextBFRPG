@@ -1,0 +1,3 @@
+﻿  BasicFantasyTextRPG.cpp
+C:\Users\Wyatt\source\repos\BasicFantasyTextRPG\BasicFantasyTextRPG\BasicFantasyTextRPG.cpp(62,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  BasicFantasyTextRPG.vcxproj -> C:\Users\Wyatt\source\repos\BasicFantasyTextRPG\x64\Debug\BasicFantasyTextRPG.exe
