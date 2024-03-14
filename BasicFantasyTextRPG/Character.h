@@ -9,9 +9,7 @@ public:
     std::string race;
     std::string characterClass;
     std::map<std::string, int> attributes;
-    int level;
-    int hitPoints;
-    int hitDie;
+    int level, hitPoints, maxHitPoints, hitDie, experiencePoints;
 
     Character(const std::string& race, const std::string& characterClass);
     void setAttributes();

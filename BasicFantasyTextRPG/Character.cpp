@@ -22,7 +22,9 @@ Character::Character(const std::string& race, const std::string& characterClass)
             }
 
             level = 1;
+            experiencePoints = 0;
 
+            //Class Hit die selection
             if (characterClass == "Fighter") {
                 hitDie = 8;
             }
@@ -33,6 +35,7 @@ Character::Character(const std::string& race, const std::string& characterClass)
                 hitDie = 4;
             }
 
+            //Race Ability Modifiers
             if (race == "Dwarf") {
                 attributes["Constituion"] = attributes["Constituion"] + 1;
                 attributes["Charisma"] = attributes["Charisma"] - 1;
@@ -41,6 +44,7 @@ Character::Character(const std::string& race, const std::string& characterClass)
             else if (race == "Elf") {
                 attributes["Intelligence"] = attributes["Intelligence"] + 1;
                 attributes["Constituion"] = attributes["Constituion"] - 1;
+                //Elves cannot have a hit die greater than d6
                 if (hitDie > 6) {
                     hitDie = 6;
                 }
@@ -50,11 +54,11 @@ Character::Character(const std::string& race, const std::string& characterClass)
                 attributes["Dexterity"] = attributes["Dexterity"] + 1;
                 attributes["Strength"] = attributes["Strength"] - 1;
             }
-
-
-
-
-
+        
+            //first level gives max hit die for hp
+            maxHitPoints = hitDie;
+            hitPoints = maxHitPoints;
+           
         }
 
         // Modify attributes based on race and class if necessary
@@ -65,6 +69,8 @@ Character::Character(const std::string& race, const std::string& characterClass)
     void Character::displayCharacter() {
         cout << "Race: " << race << ", Class: " << characterClass << "\n";
         cout << "Level: " << level << "\n";
+        cout << "Exp:" << experiencePoints << "\n";
+        cout << "Hit Points: " << hitPoints << " / " << maxHitPoints << "\n";
         for (auto& attr : attributes) {
             cout << attr.first << ": " << attr.second << "\n";
         }
