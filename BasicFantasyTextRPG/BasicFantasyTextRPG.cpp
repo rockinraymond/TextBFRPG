@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <ctime>
 #include "Character.h"
+#include "Map.h"
 // Include other necessary headers here
 
 using namespace std;
@@ -55,7 +56,13 @@ Character characterCreation() {
     return playerCharacter;
 }
 
+
+
 int main() {
+    //create game map
+    Map gameMap;
+    int playerX = 0, playerY = 0; // Starting position
+
     // Seed for random number generation
     srand(static_cast<unsigned>(time(nullptr)));
 
@@ -78,11 +85,10 @@ int main() {
 
         switch (choice) {
         case 1:
-            cout << "Exploring the world...\n";
-            // Exploration logic here
+            gameMap.exploreMap();
+            gameMap.displayLocation();
             break;
         case 2:
-            cout << "Displaying character information...\n";
             playerCharacter.displayCharacter();
             break;
         case 3:

@@ -67,6 +67,7 @@ Character::Character(const std::string& race, const std::string& characterClass)
     }
 
     void Character::displayCharacter() {
+        cout << "Displaying character information...\n";
         cout << "Race: " << race << ", Class: " << characterClass << "\n";
         cout << "Level: " << level << "\n";
         cout << "Exp:" << experiencePoints << "\n";
