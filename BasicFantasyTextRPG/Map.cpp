@@ -14,7 +14,6 @@ Map::Map() {
 
 
     grid[2][2].setEncounter(std::make_unique<Monster>("Goblin", "A small, green-skinned creature", 5));
-    grid[1][1].setItem(std::make_unique<Potion>("Healing Potion", "Restores a small amount of health", 4));
 }
 
 void Map::displayLocation() const {
@@ -26,7 +25,7 @@ void Map::displayLocation() const {
     }
 }
 
-void Map::exploreMap() {
+void Map::exploreMap(Character Player) {
     char input;
     std::cout << "Enter direction (N, S, E, W) or Z to stay put: ";
     std::cin >> input;
@@ -45,7 +44,7 @@ void Map::exploreMap() {
     }
 
     if (grid[x][y].item) {
-        grid[x][y].item->use();
+        //grid[x][y].item->use();
     }
 }
 

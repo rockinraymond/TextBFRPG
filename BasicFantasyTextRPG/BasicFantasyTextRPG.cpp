@@ -46,13 +46,14 @@ Character characterCreation() {
     std::vector<std::string> validRaces = { "Dwarf", "Elf", "Halfling", "Human" };
     std::vector<std::string> validClasses = { "Cleric", "Fighter", "Magic-User", "Thief" };
 
-    string race, characterClass;
-    
+    string name, race, characterClass;
+    std::cout << "What is your name?: ";
+    std::cin >> name;
     race = getValidInput<std::string>("Choose race (Dwarf, Elf, Halfling, Human): ", validRaces);
     characterClass = getValidInput<std::string>("Choose class (Cleric, Fighter, Magic-User, Thief): ", validClasses);
+    Weapon noWeapon("None", "Looks like its just your bare hands.", 0, 0, 'S', 3);
 
-
-    Character playerCharacter(race, characterClass);
+    Character playerCharacter(name, race, characterClass);
     return playerCharacter;
 }
 
@@ -85,7 +86,7 @@ int main() {
 
         switch (choice) {
         case 1:
-            gameMap.exploreMap();
+           // gameMap.exploreMap(playerCharacter);
             gameMap.displayLocation();
             break;
         case 2:

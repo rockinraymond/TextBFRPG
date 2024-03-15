@@ -1,11 +1,14 @@
 #pragma once
 #ifndef MAP_H
 #define MAP_H
+#include "Encounters.h"
+#include "Items.h"
+#include "Character.h"
+
 
 #include <vector>
 #include <string>
-#include "Encounters.h"
-#include "Items.h"
+
 
 struct Location {
     std::string description;
@@ -19,6 +22,7 @@ struct Location {
     // Add functions to set encounters and items
     void setEncounter(std::shared_ptr<Encounter> enc) { encounter = std::move(enc); }
     void setItem(std::shared_ptr<Item> itm) { item = std::move(itm); }
+    
 };
 
 class Map {
@@ -27,7 +31,7 @@ public:
     Map();
     int x, y;
     void displayLocation() const;
-    void exploreMap();
+    void exploreMap(Character Player);
 };
 
 #endif // MAP_H
