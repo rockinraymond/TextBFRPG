@@ -20,6 +20,7 @@ private:
 public:
     std::string name, race, characterClass;  
     std::map<std::string, int> attributes;
+    //std::map<std::string, int> attributeMods;
     std::map<std::string, int> savingThrows;
     int level, hitPoints, maxHitPoints, hitDie, armorClass, attackBonus, experiencePoints;
  
@@ -35,6 +36,8 @@ public:
     void unequipArmor();
     void unequipShield();
     void removeItemFromInventory();
+
+    int calculateAbiltyMod(int abilityScore);
 
    
 

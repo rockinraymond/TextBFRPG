@@ -23,36 +23,86 @@ void displayMainMenu() {
     cout << "Enter your choice: ";
 }
 
-// Function to check if the choice is valid and prompt again if not
-template<typename T>
-bool isValidChoice(const T& choice, const std::vector<T>& validChoices) {
-    return std::find(validChoices.begin(), validChoices.end(), choice) != validChoices.end();
+void displayRaces(std::vector<std::string> validRaces) {
+    int size = validRaces.size();
+    
+    for (int i = 1; i <= size; i++) {
+        cout << i << ". " << validRaces[i - 1] << "\n";
+    }
+    cout << "Enter your choice: ";
 }
 
-template<typename T>
-T getValidInput(const std::string& prompt, const std::vector<T>& validChoices) {
-    T input;
-    do {
-        std::cout << prompt;
-        std::getline(std::cin, input);
-        if (!isValidChoice(input, validChoices)) {
-            std::cout << "Invalid choice, please try again.\n";
-        }
-    } while (!isValidChoice(input, validChoices));
-    return input;
-}
 
 Character characterCreation() {
     std::vector<std::string> validRaces = { "Dwarf", "Elf", "Halfling", "Human" };
     std::vector<std::string> validClasses = { "Cleric", "Fighter", "Magic-User", "Thief" };
 
-    string name, race, characterClass;
-    std::cout << "What is your name?: ";
-    std::cin >> name;
-    race = getValidInput<std::string>("Choose race (Dwarf, Elf, Halfling, Human): ", validRaces);
-    characterClass = getValidInput<std::string>("Choose class (Cleric, Fighter, Magic-User, Thief): ", validClasses);
-    Weapon noWeapon("None", "Looks like its just your bare hands.", 0, 0, 'S', 3);
+    bool raceSelect = false;
+    bool classSelect = false;
 
+    string name, race, characterClass;
+    int choice;
+    
+    std::cout << "\nWhat is your name?:";
+    std::cin >> name;
+
+    cout << "\nWhat is your Race?:\n";
+    while(!raceSelect){
+        displayRaces(validRaces);
+        std::cin >> choice;
+        switch (choice) {
+        case 1:
+            race = "Dwarf";
+            raceSelect = true;
+            break;
+        case 2:
+            race = "Elf";
+            raceSelect = true;
+            break;
+        case 3:
+            race = "Halfling";
+            raceSelect = true;
+            break;
+        case 4:
+            race = "Human";
+            raceSelect = true;
+            break;
+        default:
+            cout << "Invalid choice, try again.";
+        }
+    }
+
+    cout << "\nWhat is your Class?:\n";
+    while (!classSelect) {
+        displayRaces(validClasses);
+        std::cin >> choice;
+        switch (choice) {
+        case 1:
+            characterClass = "Cleric";
+            classSelect = true;
+            break;
+        case 2:
+            characterClass = "Fighter";
+            classSelect = true;
+            break;
+        case 3:
+            if ((race == "Dwarf") or (race == "Halfling")) { cout << "\nDwarves and Halflings cannot be Magic-Users.\n"; }
+            else {
+                characterClass = "Magic-User";
+                classSelect = true;
+            }
+            break;
+        case 4:
+            characterClass = "Thief";
+            classSelect = true;
+            break;
+        default:
+            cout << "\nInvalid choice, try again.\n";
+        }
+    }
+    
+   
+   
     Character playerCharacter(name, race, characterClass);
     return playerCharacter;
 }
