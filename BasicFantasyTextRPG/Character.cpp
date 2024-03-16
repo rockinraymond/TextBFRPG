@@ -115,28 +115,43 @@ void Character::setAttributes() {
     }
 
     void Character::equipWeapon(std::unique_ptr<Weapon> weapon) {
-
+        this->unequipWeapon();
+        equippedWeapon = std::move(weapon);
     }
     void Character::equipArmor(std::unique_ptr<Armor> armor) {
-
+        this->unequipArmor();
+        equippedArmor = std::move(armor);
     }
-    void Character::equipShield(std::unique_ptr<Armor> shield) {
-
+    void Character::equipShield(std::unique_ptr<Shield> shield) {
+        this->unequipShield();
+        equippedShield = std::move(shield);
     }
-    void Character::addItemToInventory(std::unique_ptr<Item> item) {
-
+    void Character::addItemToInventory(std::shared_ptr<Item> item) {
+        inventory.push_back(item);
     }
     void Character::unequipWeapon() {
-
+        this->addItemToInventory(std::move(equippedWeapon));
+        equippedWeapon.reset();
     }
     void Character::unequipArmor() {
-
+        this->addItemToInventory(std::move(equippedArmor));
+        equippedArmor.reset();
     }
     void Character::unequipShield() {
-
+        this->addItemToInventory(std::move(equippedShield));
+        equippedShield.reset();
     }
-    void Character::removeItemFromInventory() {
+    void Character::removeItemFromInventory(std::string name) {
+        inventory.erase(std::remove_if(inventory.begin(), inventory.end(),
+            [name](const std::shared_ptr<Item>& item) { return item->name == name; }),
+            inventory.end());
+    }
 
+    void Character::displayInventory() const {
+        std::cout << name << "'s Inventory:" << std::endl;
+        for (const auto& item : inventory) {
+            std::cout << "- " << item->name << ": " << item->description << std::endl;
+        }
     }
 
 

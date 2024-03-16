@@ -4,9 +4,10 @@
 #include "Items.h"
 #include <string>
 #include <map>
+#include <memory>
 #include <vector>
 #include <iostream>
-#include <memory>
+
 
 
 
@@ -20,7 +21,6 @@ private:
 public:
     std::string name, race, characterClass;  
     std::map<std::string, int> attributes;
-    //std::map<std::string, int> attributeMods;
     std::map<std::string, int> savingThrows;
     int level, hitPoints, maxHitPoints, hitDie, armorClass, attackBonus, experiencePoints;
  
@@ -30,14 +30,16 @@ public:
     
     void equipWeapon(std::unique_ptr<Weapon> weapon);
     void equipArmor(std::unique_ptr<Armor> armor);
-    void equipShield(std::unique_ptr<Armor> shield);
-    void addItemToInventory(std::unique_ptr<Item> item);
+    void equipShield(std::unique_ptr<Shield> shield);
+    void addItemToInventory(std::shared_ptr<Item> item);
     void unequipWeapon();
     void unequipArmor();
     void unequipShield();
-    void removeItemFromInventory();
+    void removeItemFromInventory(std::string name);
+    void displayInventory() const;
 
     int calculateAbiltyMod(int abilityScore);
+    
 
    
 

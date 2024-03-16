@@ -6,6 +6,7 @@
 
 
 class Item {
+
 public:
     std::string name, description;
     int price, weight;
